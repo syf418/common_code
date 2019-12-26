@@ -1,0 +1,60 @@
+1.tensorflow: Google开源的软件库
+    - 采取数据流图，用于数值计算。
+    - 支持多种平台： GPU / CPU / 移动设备
+    - 最初用于深度学习，变得越来越通用
+2.数据流图：
+    - 节点：处理数据
+    - 线： 节点间的输入输出关系
+    - 线上运输张量
+    - 节点被分配到各种计算设备上运行
+3.特性：
+    - 高度的灵活性
+    - 可移植性
+    - 产品和科研结合
+    - 自动求微分
+    - 多语言支持
+    - 性能最优化
+4.版本变迁：
+    - 1.0主要特性：
+        * XLA：Accelerate Linear Algebra - 线性运算编译器，优化性能
+            - 提升训练速度58倍
+            - 可以在移动设备运行
+        * 引入更高级别的API：tf.layers/tf.metrics/tf.losses/tf.keras
+        * Tensorflow调试器
+        * 支持docker镜像，引入tensorflow serving服务
+        [架构]：
+            . Keras
+            . Estimator
+            . Datasets
+            . Layers
+            . Distribution engine
+    - 2.0主要特性：
+        * 使用tf.keras和eager model进行更加简单的模型构建
+        * 鲁邦的跨平台模型部署
+        * 强大的研究实验
+        * 清除不推荐使用的API和减少重复来简化API
+5.Tensorflow2.0: 简化的模型开发流程
+    - 使用tf.data加载数据
+    - 使用tf.keras构建模型，也可以使用premade estimator来验证模型
+        - 使用tensorflow hub进行迁移学习
+    - 使用eager mode进行运行和调试
+    - 使用分发策略来进行分布式训练
+    - 导出到SavedModel
+    - 使用Tensorflow Serve、Tensorflow Lite、Tensorflow.js部署模型
+6.Tensorflow2.0: 强大的跨平台能力
+    - Tensorflow 服务
+        - 直接通过HTTP/REST或GRPC/协议缓冲区
+    - Tensorflow Lite: 可部署在Android/IOS和嵌入式系统上
+    - Tensorflow.js: 在javascript中部署模型
+    - 其他语言
+7.Tensorflow2.0: 强大的研究实验
+    - Keras功能API和子类API，允许创建复杂的拓扑结构
+    - 自定义训练逻辑，使用tf.GradientTape和tf.custom_gradient进行更细粒度的控制。
+    - 底层API自始至终可以与高层结合使用，完全的可定制。
+    - 高级扩展：Ragged Tensors / Tensor2Tensor等
+
+8.Tensorflow vs. PyTorch
+    - 入门时间：
+    - 图创建和调试：
+    - 全面性：pytorch稍弱
+    - 序列化与部署：
