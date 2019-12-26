@@ -1,0 +1,13 @@
+1.键值对RDD的创建
+    -1.第一种创建方式：从文件中加载
+        可以采用多种方式创建键值对RDD，其中一种主要的方式是使用map()函数来实现。
+    -2.第二种创建方式：通过并行集合（列表）创建RDD
+2.常用的键值对RDD转换操作
+    * reduceByKey(func): 使用func函数合并具有相同键的值
+    * groupByKey()：对具有相同键的值进行分组
+    * keys：keys只会把pair RDD中的key返回形成一个新的RDD
+    * values：values只会把pair RDD中的values返回形成一个新的RDD
+    * sortByKey()：返回一个根据键排序的RDD
+    * mapValues(func)：对键值对RDD中的每个value都应用一个函数，但是，key不会发生变化
+    * join：内连接，只有在两个数据集中都存在的key才会被输出，最终得到一个(K,(V1,V2))类型的数据集。
+    * combineByKey

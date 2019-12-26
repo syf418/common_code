@@ -1,0 +1,31 @@
+1.大数据的思维：
+    - 全样而非抽样
+    - 效率而非精确
+    - 相关而非因果
+2.两大核心技术：
+    - 分布式存储
+    - 分布式处理
+3.大数据计算模式及其代表产品：
+    -1.批处理计算：针对大规模数据的批量处理
+        MapReduce / Spark
+    -2.流计算：针对流数据的实时计算
+        Storm / S4 / Flume / Streams / Puma / DStream / Super Mario / 银河流数据处理平台等
+    -3.图计算：针对大规模图结构数据的处理
+        Pregel / GraphX / Giraph / PowerGraph / Hama / GoldenOrb等
+    -4.查询分析计算：大规模数据的存储管理和查询分析
+        Dremel / Hive / Cassandra / Impala等
+4.Hadoop与Spark的对比：
+    -1.Hadoop存在如下一些缺点：
+        . 表达能力有限
+        . 磁盘IO开销大
+        . 延迟高
+            * 任务之间的衔接涉及IO开销
+            * 在前一个任务执行完成之前，其他任务就无法开始，难以胜任复杂、多阶段的计算任务。
+    -2.Spark相比于Hadoop MapReduce的优点：
+        . Spark的计算模式也属于MapReduce, 但不局限于Map和Reduce操作，还提供了多种数据集操作类型，编程模式比Hadoop MapReduce更灵活。
+        . Spark提供了内存计算，可将中间结果放到内存中，对于迭代运算效率更高。
+        . Spark基于DAG的任务调度执行机制，要优于Hadoop MapReduce的迭代执行机制
+    使用Hadoop进行迭代计算非常耗资源；
+    Spark将数据载入内存后，之后的迭代计算都可以直接使用内存中的中间结果作运算，避免了从磁盘中频繁读取数据。
+5.Flink：一行一行处理
+    性能：Flink > Spark > Hadoop(MR)
