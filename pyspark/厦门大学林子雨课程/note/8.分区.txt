@@ -1,0 +1,21 @@
+1.分区的作用：
+    -1.增加并行度
+    -2.减少通信开销
+2.RDD分区原则：
+    * RDD分区的一个原则是使得分区的个数数量尽量等于集群中的CPU核心（core）数目
+    * 对于不同的Spark部署模式而言（本地模式/Standalone模式/YARN模式/Mesos模式），都可以通过设置spark.default.parallelism这个参数的值，
+      来配置默认的分区数目，一般而言：
+        -1.本地模式：默认为本地机器的CPU数目，若设置了local[N],则默认为N
+        -2.Apache Mesos: 默认的分区数为8
+        -3.Standalone或YARN：在"集群中所有CPU核心数目总和"和"2"二者中取较大值作为默认值。
+3.设置分区的数目：
+    -1.创建RDD时手动指定分区个数
+        在调用textFile()和parallelize()方法的时候手动指定分区个数即可，语法格式如下：
+            sc.textFile(path, partitionNum)
+            其中，path参数用于指定要加载的文件的地址，partitionNum参数用于指定分区个数。
+    -2.使用repartition方法重新设置分区个数
+        通过转换操作得到新RDD时，直接调用 repartition 方法即可。
+        Other: RDD.glom().collect() -- 显示RDD的分区数量
+    -3.自定义分区方法
+        Spark提供了自带的HashPartitioner(哈希分区)与RangePartitioner(区域分区)，能够满足大多数场景的需求，与此同时，Spark也支持自定义
+        分区方式，即通过提供一个自定义的分区函数来控制RDD的分区方式，从而利用领域知识进一步减少通信开销。

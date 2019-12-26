@@ -1,0 +1,35 @@
+教程网址：
+1.https://www.jianshu.com/p/5a42fe0eed4d
+2.
+
+SparkContext：-----
+    -1.PySpark类的详细信息以及SparkContext可以采用的参数。
+        class pyspark.SparkContext (
+           master = None,
+           appName = None,
+           sparkHome = None,
+           pyFiles = None,
+           environment = None,
+           batchSize = 0,
+           serializer = PickleSerializer(),
+           conf = None,
+           gateway = None,
+           jsc = None,
+           profiler_cls = <class 'pyspark.profiler.BasicProfiler'>
+        )
+    -2.以下是SparkContext的参数具体含义：
+        Master- 它是连接到的集群的URL。
+        appName- 您的工作名称。
+        sparkHome - Spark安装目录。
+        pyFiles - 要发送到集群并添加到PYTHONPATH的.zip或.py文件。
+        environment - 工作节点环境变量。
+        batchSize - 表示为单个Java对象的Python对象的数量。设置1以禁用批处理，设置0以根据对象大小自动选择批处理大小，或设置为-1以使用无限批处理大小。
+        serializer- RDD序列化器。
+        Conf - L {SparkConf}的一个对象，用于设置所有Spark属性。
+        gateway  - 使用现有网关和JVM，否则初始化新JVM。
+        JSC - JavaSparkContext实例。
+        profiler_cls - 用于进行性能分析的一类自定义Profiler（默认为pyspark.profiler.BasicProfiler）。
+    -3.在上述参数中，主要使用master和appname。任何PySpark程序的会使用以下两行：
+        from pyspark import SparkContext
+        sc = SparkContext("local", "First App")
+

@@ -1,0 +1,27 @@
+1.Spark支持三种不同类型的部署方式，包括：
+    -1.Standalone: 使用Spark自带的简单集群管理器
+    -2.Spark on Mesos: 使用Mesos作为集群管理器
+    -3.Spark on YARN: 使用YARN作为集群管理器
+    -4.Local模型：单机模式
+2.pyspark命令及其常用的参数：
+        pyspark --master <master-url>
+    Spark的运行模式取决于传递给SparkContext的Master URL的值。Master URL可以是以下任一种形式：
+        . local: 使用一个Worker线程本地化运行Spark（完全不并行）
+        . local[*]: 使用逻辑CPU个数数量的线程来本地化运行Spark
+        . local[K]: 使用K个Worker线程本地化运行Spark（理想情况下，K应该是根据运行机器的CPU核数设定）
+        . spark://HOST:PORT: 连接到指定的Spark standalone master。默认端口是7077
+        . yarn-client: 以客户端模式连接YARN集群。集群的位置可以在HADOOP_CONF_DIR环境变量中找到。
+        . yarn-cluster: 以集群模式连接YARN集群。集群的位置可以在HADOOP_CONF_DIR环境变量中找到。
+        . mesos://HOST:PORT: 连接到指定的Mesos集群，默认接口是5050.
+    其他：
+        --jars: 这个参数用于把相关的JAR包添加到CLASSPATH中，如果有多个jar包，可以使用逗号分隔符连接他们。
+    for example:
+        -1.采用本地模式，在4个CPU核心上运行pyspark
+            $ cd /usr/local/spark
+            $ ./bin/pyspark --master local[4]
+            添加jar包：
+            $ ./bin/pyspark --master local[4] --jars code.jar
+        2.可以使用 pyspark --help 命令获取完整的选项列表：
+            $ cd /usr/local/spark
+            $ ./bin/pyspark --help
+3.可以使用spark-submit提交python代码到Spark中执行。
