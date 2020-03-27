@@ -10,8 +10,6 @@ import numpy as np
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_squared_error
 
-import sys
-
 class model_sarimax():
     @staticmethod
     def _sorted(data, sort_col):
