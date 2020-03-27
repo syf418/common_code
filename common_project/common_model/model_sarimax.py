@@ -10,7 +10,7 @@ import numpy as np
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_squared_error
 
-from common_project.common_module.mape_exclude_zero import mape_exclude_zero
+import sys
 
 class model_sarimax():
     @staticmethod
