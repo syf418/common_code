@@ -5,6 +5,8 @@
 @File    : 1.tensorflow_vs_pytorch.py
 '''
 # 1 + 1/2 + 1/2^2 + ... + 1/2^50
+import warnings
+warnings.filterwarnings(action='ignore')
 
 import tensorflow as tf
 print(tf.__version__)
@@ -25,4 +27,4 @@ with tf.Session() as sess:
         sess.run(div_op)
     print(x.eval())
 
-import tor
+# import torch

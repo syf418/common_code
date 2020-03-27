@@ -1,0 +1,28 @@
+1.基础API
+2.基础API与keras的集成
+    - 自定义损失函数
+    - 自定义层次
+3.@tf.function的使用
+    - 图结构：将python函数编译成图
+    - 易于将模型导出称为GraphDef+checkpoint或者SavedModel
+    - 使得eager execution可以默认打开
+    - 1.0的代码可以通过tf.function来继续在2.0里使用
+    - 替代session
+4.自定义求导
+
+5.API 列表：
+    - 基础数据类型
+        - Tf.constant, tf.string
+        - tf.ragged.constant, tf.SparseTentor, tf.Variable
+    - 自定义损失函数：tf.reduce_mean
+    - 自定义层次：keras.layers.lambda和继承法
+    - tf.function:
+        - tf.function, tf.autograph.to_code, get_concrete_function
+    - GraphDef
+        - get_operations, get_operation_by_name
+        - get_tensor_by_name, as_graph_def
+    - 自动求导
+        - tf.gradienttape
+        - optimzier.apply_gradients
+
+

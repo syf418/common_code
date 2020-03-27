@@ -7,12 +7,10 @@ import pandas as pd
 from pandas import DataFrame
 import numpy as np
 
-from matplotlib import pyplot as plt
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.metrics import mean_squared_error
 
-plt.rcParams['font.sans-serif'] = ['SimHei']  #用来正常显示中文标签
-plt.rcParams['axes.unicode_minus'] = False  #用来正常显示负号
+from common_project.common_module.mape_exclude_zero import mape_exclude_zero
 
 class model_sarimax():
     @staticmethod
@@ -107,7 +105,6 @@ class model_sarimax():
 
     def __str__(self, title, items):
         print("*****【{}】*****\n".format(title), items, flush=True)
-
 
 
 if __name__ == "__main__":

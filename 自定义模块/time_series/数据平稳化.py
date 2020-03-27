@@ -9,6 +9,19 @@ from pandas import DataFrame, Series
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 
+def stationarity(data:DataFrame, diff=1, show_plot=False):
+    """差分平稳化"""
+    for i in range(diff):
+        data = data.diff(1)
+        if show_plot:
+            plt.figure(figsize=(10,6))
+            plt.plot(data.index, data.values)
+            plt.title("diff {}".format(i+1))
+            plt.grid()
+            plt.show()
+    return data
+
+
 def stationary_test(data:DataFrame or Series, window=14):
     '''
     判断数据是稳定的常基于对于时间是常量的几个统计量：
@@ -20,6 +33,10 @@ def stationary_test(data:DataFrame or Series, window=14):
     # 计算移动均值和标准差
     rolmean = data.rolling(window).mean()
     rolstd = data.rolling(window).std()
+
+    print( np.average(data[:8]))
+    print(rolmean)
+    print(len(data), len(rolmean))
 
     # plot rolling statistics:
     fig = plt.figure()
@@ -50,5 +67,5 @@ if __name__ == "__main__":
     df["time"] = pd.date_range(start="2020-01-01 00:00", periods=40, freq="1min")
     df["y"] = np.random.randn(len(df))
 
-    stationary_test(df["y"], window=7)
+    stationary_test(df["y"], window=8)
 
