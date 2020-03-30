@@ -35,7 +35,7 @@ class word_segmentation():
             self.datas = list(jieba.cut(self.datas))
         elif type(self.datas) is DataFrame:
             stopkey_list = [i.strip("\n") for i in stopkey_list]
-            self.datas["{}_".format(self.target_col)] = self.datas[self.target_col].apply(
+            self.datas["{}_cut".format(self.target_col)] = self.datas[self.target_col].apply(
                                 lambda x: [i for i in list(jieba.cut(x)) if i not in stopkey_list])
         elif type(self.datas) in [list,array]:
             result = []
@@ -49,7 +49,9 @@ class word_segmentation():
 
 if __name__ == "__main__":
     text = "我突然释怀的笑，笑声盘旋半山腰，随风在飘摇啊摇，来到我的面前摇"
+    import pandas as pd
+    df = pd.DataFrame([text], columns=["text"])
 
-    text_ = word_segmentation([text])
+    text_ = word_segmentation(df, "text")
     s = text_.cut_to_words()
     print("s:", s)
