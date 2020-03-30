@@ -3,13 +3,12 @@
 @Time    : 2019/3/21 17:25
 @Author  : shangyf
 '''
-import time
+
+from operator import itemgetter
 
 import distance
-import pandas as pd
-import jieba
 from pypinyin import lazy_pinyin
-from operator import itemgetter
+
 
 # 句子转拼音
 def sentence_to_pinyin(text):
@@ -50,7 +49,6 @@ def sentence_similar(text, sentences):
             a = nums
             similar_list.append((s, nums))
     similar_list = sorted(similar_list, key=itemgetter(1))
-    print("similar_list:", similar_list)
     return similar_list, index
 
 if __name__ == "__main__":
