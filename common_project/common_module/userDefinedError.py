@@ -16,3 +16,7 @@ class NoResultsError(Exception):
 class ConfigReadError(Exception):
     def __str__(self):
         return "Failed to read the configuration information!"
+
+class dataTypeError(Exception):
+    def __str__(self):
+        return "Data type mismatched!"

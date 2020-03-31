@@ -33,16 +33,17 @@ class word_segmentation():
     def _posseg_cut(x, stopkey_list=[], flag_options=[], return_flag=True):
         if return_flag:
             if len(flag_options) > 0:
-                cut_result = [(i.word, i.flag) for i in list(posseg.cut(x))
+                cut_result = [i.word + "-" + i.flag for i in list(posseg.cut(x))
                               if i.word not in stopkey_list and i.flag in flag_options]
             else:
-                cut_result = [(i.word, i.flag) for i in list(posseg.cut(x)) if i.word not in stopkey_list]
+                cut_result = [i.word + "-" + i.flag for i in list(posseg.cut(x)) if i.word not in stopkey_list]
         else:
             if len(flag_options) > 0:
                 cut_result = [i.word for i in list(posseg.cut(x))
                               if i.word not in stopkey_list and i.flag in flag_options]
             else:
                 cut_result = [i.word for i in list(posseg.cut(x)) if i.word not in stopkey_list]
+        cut_result = " ".join(cut_result)
         return cut_result
 
     def __init__(self, datas, target_col='', userDictPath=None, stopKeyPath=None):
