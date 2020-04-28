@@ -15,16 +15,43 @@ from common_project.common_module.config_module import get_config
 from common_project.common_module.logging_module import logging_func
 logger = logging_func()
 
+# configuration
+rac_cluster = False
+
 Oracle_info = get_config("Oracle")
 db_username = Oracle_info["db_username"]
 db_password = Oracle_info["db_password"]
 db_host = Oracle_info["db_host"]
 db_service_name = Oracle_info["db_service_name"]
-user_info = db_username + '/' + db_password + '@' + db_host + '/' + db_service_name
+if rac_cluster:
+    dsn = Oracle_info["dsn"]
+
+'''
+dsn sample：
+     (DESCRIPTION =
+    (ADDRESS_LIST =
+      (FAILOVER = ON)
+      (LOAD_BALANCE = OFF)  
+        (ADDRESS = (PROTOCOL = TCP)(HOST = xxx.xxx.x.xxx)(PORT = 1521))	
+     	(ADDRESS = (PROTOCOL = TCP)(HOST = xxx.xxx.x.xxx)(PORT = 1521))
+    	(ADDRESS = (PROTOCOL = TCP)(HOST = xxx.xxx.x.xxx)(PORT = 1521))
+    	(ADDRESS = (PROTOCOL = TCP)(HOST = xxx.xxx.x.xxx)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+    	(SERVER = DEDICATED)
+    	(FAILOVER_MODE=(TYPE=select)(METHOD=basic))
+    	(INSTANCE_ROLE = ANY)
+    	(SERVICE_NAME = pdb_ipms)
+    )
+  )
+'''
 
 # connect to Oracle
 def connect_oracle(sql_text):
-    conn = cx_Oracle.connect(user_info)
+    if not rac_cluster:
+        conn = cx_Oracle.connect(user_info)
+    else:
+        db1 = cx_Oracle.connect(str(db_username), str(db_password), dsn=str(dsn))
     print("数据库已成功连接...", flush=True)
     logger.info("Database connection successful!")
     cursor = conn.cursor()
@@ -44,7 +71,10 @@ def connect_oracle(sql_text):
 
 # insert into table
 def insert_into_oracle(df:DataFrame,  insert_sql:str):
-    conn = cx_Oracle.connect(user_info)
+    if not rac_cluster:
+        conn = cx_Oracle.connect(user_info)
+    else:
+        db1 = cx_Oracle.connect(str(db_username), str(db_password), dsn=str(dsn))
     print("数据库连接成功...", flush=True)
     logger.info("Database connection successful!")
     cursor = conn.cursor()
