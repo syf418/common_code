@@ -1,7 +1,9 @@
 #!/bin/bash
-nohup /opt/anaconda3/bin/python3 face_comparison_service.py > /dev/null 2>&1 &
+{
 while true
 do
   find ./face_picture -mmin +60 -type f -name "*" -exec rm -f {} \;
   sleep 60;
 done
+} &
+/opt/anaconda3/bin/python3 face_comparison_service.py
