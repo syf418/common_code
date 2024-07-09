@@ -1,0 +1,2 @@
+# 异常处理方案
+1.python flask服务启动 host 显示为当前主机ip(应为0.0.0.0), 使用gunicorn部署可解决！
